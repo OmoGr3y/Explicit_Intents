@@ -2,14 +2,19 @@ package com.example.dice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Random;
 
 public class DiceActivity extends AppCompatActivity {
     public static final String  KEY_NUM_DICE ="num_dice";
-
+    public static final String KEY_TOTAL = "total" ;
+    private int total;
     private Random random = new Random();
 
     @Override
@@ -18,6 +23,17 @@ public class DiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dice);
 
         TextView resultView = findViewById(R.id.result);
+        Button doneButton = findViewById(R.id.done_button);
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent data = new Intent();
+                data.putExtra(KEY_TOTAL, total);
+                setResult(Activity.RESULT_OK,data);
+                finish();
+            }
+        });
 
 //        int result = rollOne();
 //        String text = String.valueOf(result);
@@ -29,7 +45,7 @@ public class DiceActivity extends AppCompatActivity {
 
     private void rollAll(TextView textView, int numDice){
         StringBuilder builder = new StringBuilder();
-        int total = 0;
+
         for (int i = 0; i < numDice; ++i){
             int result = rollOne();
             total += result;
