@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class DiceActivity extends AppCompatActivity {
+    public static final String  KEY_NUM_DICE ="num_dice";
 
     private Random random = new Random();
 
@@ -22,7 +23,7 @@ public class DiceActivity extends AppCompatActivity {
 //        String text = String.valueOf(result);
 //        resultView.setText(text);
 
-        int numDice = 2;
+        int numDice = getIntent().getIntExtra(KEY_NUM_DICE,1);
         rollAll(resultView, numDice);
     }
 
